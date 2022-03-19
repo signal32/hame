@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://blog.hamishweir.uk/sitemap.xml
