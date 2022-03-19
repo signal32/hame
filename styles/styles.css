@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hame-markdown {
+    @apply text-slate-300
+}
+
+
+.hame-markdown ul {
+    @apply list-disc pl-8; 
+  }
+
+.hame-markdown a {
+    @apply text-slate-100 underline underline-offset-2;
+}
+
+.hame-markdown a:hover {
+    @apply text-rose-400;
+}
+
+.hame-markdown h1 {
+    @apply text-xl font-semibold bg-slate-800 rounded shadow px-2 py-2 my-2;
+}
+
+.hame-markdown h2 {
+    @apply text-lg font-semibold bg-slate-600 rounded shadow px-2 py-1 my-2;
+}
+
+.hame-markdown h3 {
+    @apply font-semibold px-2 py-1 my-2
+}
+
+.hame-markdown pre {
+    @apply rounded-lg shadow-lg p-2
+}
+
+.hame-markdown img {
+    @apply rounded-lg shadow-lg p-2
+}
+  
+.hame-markdown blockquote {
+    @apply rounded-lg p-2 bg-slate-600
+}
+  

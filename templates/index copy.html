@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+    {% block extra_head %}
+    <link rel="stylesheet" href="{{ get_url(path='styles/style.css', cachebust=true) }}">
+    {% endblock extra_head %}
+</head>
+
+<body class=" h-screen dark:bg-gray-700 bg-slate-300">
+    <div class=" bg-slate-800 mb-5" >
+    <div class="max-w-2xl mx-auto px-4 sm:px-6">
+        <div class="flex justify-between items-center py-1 md:justify-start">
+            <img class=" w-1/3 dark:invert py-0" src="{{ get_url(path='images/logo.svg') }}" alt="{{config.title}}"/>
+
+
+            {% if config.extra.links %}
+            <div class=" w-2/3 flex justify-end items-end py-0">
+                {% for link in config.extra.links %}
+                <svg class=" hover:fill-white fill-slate-400 w-8 h-8 px-2 transition-all">
+                    <use xlink:href="icons/bootstrap-icons.svg#{{link.icon}}"/>
+                  </svg>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+
+
+    {% block content %}
+    {% set blog = get_section(path="blog/_index.md") %}
+
+    {% if section.content or blog.pages %}
+    <main>
+        
+
+        {% if section.content %}
+        <div {% if blog.pages %}class="space"{% endif %}>
+            {{ section.content | safe }}
+        </div>
+        {% endif %}
+
+        {% if blog.pages %}
+        <h2 class=" text-lg text-slate-100">Recent posts</h2>
+        <div>
+
+            {% for post in blog.pages | slice(end=20) %}
+            <div class="mb-4 max-w-2xl mx-auto bg-slate-700 rounded-xl shadow-lg border-2 border-slate-700 hover:border-slate-600 transition-all">
+                
+                {% if post.extra.image %}
+                <img class="object-cover h-40 w-full overflow-auto"src="{{post.extra.image}}"/>
+                {% else %}
+                <img class="object-cover h-10 w-full overflow-auto"src="https://images.pexels.com/photos/310452/pexels-photo-310452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+                {% endif%}
+
+                <div class=" px-3">
+                    <div class="flex justify-between items-center py-1 md:justify-start">
+                        <div class="w-3/4 text-xl font-medium text-slate-100">{{post.title}}</div>
+
+                        <div class="w-1/4 flex items-center">
+                            <svg class="w-1/3 hover:fill-white fill-slate-400 h-5 px-2 transition-all">
+                                <use xlink:href="icons/bootstrap-icons.svg#calendar"/>
+                            </svg>
+                            <div class="font-small text-slate-400">{{post.date}}</div>
+                        </div>
+
+                    </div>
+                    <p class="text-slate-300">{{ post.content | striptags | truncate(length=180) | safe}}</p>
+        
+                    <button
+                        class="py-2 px-4 my-2 w-full bg-slate-600 text-white rounded-lg shadow-md hover:bg-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-opacity-75"
+                        href="{{post.permalink}}">
+                        Read moree
+                    </button>
+                </div>
+              </div>
+            {% endfor %}
+        </div>
+        <p><a href="{{ blog.permalink }}">Archive</a></p>
+        {% endif %}
+
+        <button
+        class="py-2 my-2 px-4 bg-slate-600 text-white rounded-lg shadow-md hover:bg-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-opacity-75">
+        Read more
+    </button>
+
+    </main>
+    {% endif %}
+
+    {% endblock content %}
+
+</body>

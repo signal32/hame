@@ -1,0 +1,21 @@
+{% set page = load_data(path="blog/hello_world.md") %}
+<div id="page_contents" class=" hidden">{{page}}</div>
+<div id="test" class=" bg-emerald-800">
+    <div id="name"/></div>
+</div>
+
+<script>
+    const info = document.getElementById("page_contents").textContent;
+    const name = info.split('\n');
+    const map = new Map();
+    for (const e of name) {
+        splt = e.split('=');
+        //if (splt.length = 1) map.set(splt[0], splt[1]);
+        if (splt.length = 2) {
+            console.log(splt[0], splt[1]);
+            map.set(splt[0].trim(), splt[1]);
+        }
+    }
+    document.getElementById("name").textContent = map.get('title');
+
+</script>
