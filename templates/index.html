@@ -62,16 +62,33 @@
 
 
         {% block content %}
-        {% set blog = get_section(path="blog/_index.md") %}
 
+        <!-- Default home page content -->
+        {% set blog = get_section(path="blog/_index.md") %}
         {% if section.content or blog.pages %}
         <div>
             
             <!-- Main page content -->
             {% if section.content %}
-            <div class="mb-4 mx-auto bg-slate-700 rounded-xl shadow-lg border-2 border-slate-700">
-                <div class="px-3 hame-markdown">{{ section.content | safe }}</div>
+
+            <div class="flex justify-between items-center py-4">
+                <div class="w-1/3">
+                    <img class="rounded-full mb-2 border-2 border-slate-500 shadow-xl hover:animate-spin " src="/images/me.jpg"/>
+                    <div class=" text-slate-100 text-lg text-center">{{config.title}}</div>
+                    <div class="flex justify-center items-center">
+                        {% for link in config.extra.links %}
+                        <svg class=" hover:fill-white fill-slate-400 w-8 h-8 px-2 transition-all">
+                            <use xlink:href="/icons/bootstrap-icons.svg#{{link.icon}}"/>
+                        </svg>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class=" w-2/3">
+                    <div class=" pl-10 hame-markdown">{{ section.content | safe }}</div>
+                </div>
             </div>
+
+
             {% endif %}
 
             <!-- Display post listing on home page -->
@@ -130,6 +147,10 @@
         <div class="py-2 px-5 max-w-2xl mx-auto flex justify-between items-center md:justify-start">
             <div class="w-1/5">
                 <img class="dark:invert py-0" src="{{ get_url(path='/images/logo.svg') }}" alt="{{config.title}}"/>
+            </div>
+            <div class="w-4/5">
+                <p class="text-slate-400 text-xs text-right">Made with ❤ in Scotland</p>
+                <p class="text-slate-400 text-xs text-right">using <a href="https://tailwindcss.com/">Tailwind CSS</a>  and <a href="https://www.getzola.org/">Zola</a></p>
             </div>
         </div>
     </footer>
