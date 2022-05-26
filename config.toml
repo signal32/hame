@@ -40,3 +40,5 @@ other_sites_list = [
     {title = "Rails Developments", href = "http://rails.hamishweir.uk"},
     {title = "Photography", href = "https://photos.hamishweir.uk"}
 ]
+
+posts_per_page = 10

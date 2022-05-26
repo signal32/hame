@@ -54,9 +54,11 @@
 
                         {% for link in config.extra.links %}
                         <div class="flex">
+                            <a href="{{link.href}}">
                             <svg class=" hover:fill-white fill-slate-300 w-8 h-8 px-2 transition-all">
                                 <use xlink:href="/icons/bootstrap-icons.svg#{{link.icon}}"/>
                             </svg>
+                        </a>
                         </div>
                         {% endfor %}
                     </div>
@@ -102,9 +104,9 @@
             <!-- Display post listing on home page -->
             {% if blog.pages %}
             <div>
-                <h2 class=" text-xl text-slate-100 text-center">Recent posts</h2>
+                <h2 class=" text-xl mb-2 dark:text-slate-100 text-gray-800 text-center">Recent posts</h2>
 
-                {% for post in blog.pages | slice(end=20) %}
+                {% for post in blog.pages | slice(end=config.extra.posts_per_page) %}
                 <div 
                 class="mb-4 mx-auto dark:bg-gray-800 bg-gray-200 rounded-xl shadow-lg">
                     
@@ -117,8 +119,8 @@
                     <div class=" px-3">
                         <div class="flex justify-between items-center py-1 sm:justify-start">
                             <div class="w-3/4 text-xl font-medium dark:text-slate-100 text-slate-800">{{post.title}}</div>
-                            <div class="w-1/4 flex items-center">
-                                <svg class="w-1/3 dark:fill-slate-400 fill-slate-600 h-4 px-2">
+                            <div class="w-1/4 flex items-center justify-end">
+                                <svg class="w-1/4 dark:fill-slate-400 fill-slate-600 h-4 px-2">
                                     <use xlink:href="icons/bootstrap-icons.svg#calendar"/>
                                 </svg>
                                 <div class="font-small dark:text-slate-400 text-slate-600">{{post.date | date(format="%-d %B, %Y")}}</div>
@@ -131,7 +133,7 @@
                             class="py-2 px-4 my-2 w-full bg-ocean text-white rounded-lg shadow-md hover:bg-air focus:outline-none focus:ring-2 focus:ring-paua focus:ring-opacity-75"
                             onclick="window.location.href='{{post.permalink}}'">
                             Read more
-                    </button>
+                        </button>
                     </div>
                 </div>
                 {% endfor %}
@@ -142,6 +144,13 @@
             class="py-2 my-2 px-4 bg-slate-600 text-white rounded-lg shadow-md hover:bg-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-opacity-75">
             Read more
             </button> #}
+            {% if blog.pages | length > config.extra.posts_per_page %}
+            <button
+            class="py-2 px-4 my-2 w-full bg-ocean text-white rounded-lg shadow-md hover:bg-air focus:outline-none focus:ring-2 focus:ring-paua focus:ring-opacity-75"
+            onclick="window.location.href='/blog/page/2'">
+                See older posts
+            </button>
+            {% endif %}
 
         </div>
         {% endif %}
@@ -150,32 +159,32 @@
     </main>
 
     <footer class="align-bottom dark:text-gray-300 text-gray-700">
-        <div class="max-w-4xl mx-auto z-50">
+        <div class="max-w-4xl mx-auto -z-20">
             <div class=" px-2 sm:px-6 mb-2 rounded-lg shadow-lg dark:bg-gray-800 bg-gray-200">
-                <div class="py-3 mx-auto flex justify-between items-center sm:justify-start">
+                <div class="mx-auto flex justify-between items-center">
                     <div class="w-1/5">
-                        <img class="dark:invert py-0" src="{{ get_url(path='/images/logo.svg') }}" alt="{{config.title}}"/>
+                        <img class="dark:invert py-2" src="{{ get_url(path='/images/logo.svg') }}" alt="{{config.title}}"/>
+                       
                     </div>
-                    <div class="w-1/5">
-                        <h1>Random Entry</h1>
-                        <p class=" dark:text-gray-400 text-gray-600">Yeet</p>
+                    <div class="w-1/5 hame-markdown">
+                        <p class=" dark:text-gray-300 text-gray-600 text-xs italic">Copyright&#169; Hamish Weir 2022</p>
                     </div>
                 </div>
             </div>
         </div>
         {% if config.extra.other_sites_list %}
-        <div class="z-0 relative -top-6 pt-0 mt-0 left-0 right-0 max-w-4xl sm:px-6 mb-2 rounded-b-lg shadow-lg bg-ocean mx-auto">
+        <div class="relative -top-3 pt-0 mt-0 left-0 right-0 max-w-4xl sm:px-6 mb-2 rounded-b-lg shadow-lg bg-ocean mx-auto">
 
                 <div class="py-3 mx-auto flex justify-start items-center gap-2">
-                    <div class="flex-none basis-1/5 dark:bg-gray-800 bg-gray-200 p-1 rounded-b-lg text-center shadow-lg">
+                    <div class="flex-none basis-1/5 dark:bg-gray-800 bg-gray-200 p-1 rounded-lg text-center shadow-lg">
                         <h1 class="text-sm"> {% if config.extra.other_sites_label %} {{config.extra.other_sites_label}} {% else %} Other websites {% endif %} </h1>
                     </div>
 
                     {% for site in config.extra.other_sites_list %}
-                    <div class="flex text-sm text-gray-400 text-center">
+                    <div class="flex text-sm text-gray-300 hover:text-gray-50 hover:underline text-center">
                         <a href="{{site.href}}">{{site.title}}</a>
                     </div>
-                    <div class="flex text-sm text-gray-400 text-center">
+                    <div class="flex text-sm text-gray-300 text-center">
                         <p>|</p>
                     </div>
                     {% endfor %}

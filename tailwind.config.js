@@ -13,6 +13,9 @@ module.exports = {
         heather: '#88639D',
         htest: '#1a0c0e',
         ...colors
+      },
+      fontFamily: {
+        'serif': ['nanum']
       }
     },
     variants: {},

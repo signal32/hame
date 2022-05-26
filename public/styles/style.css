@@ -502,14 +502,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   }
 }
 
-.pointer-events-none {
-  pointer-events: none;
-}
-
-.static {
-  position: static;
-}
-
 .absolute {
   position: absolute;
 }
@@ -527,8 +519,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   top: 0px;
 }
 
-.-top-6 {
-  top: -1.5rem;
+.-top-3 {
+  top: -0.75rem;
 }
 
 .left-0 {
@@ -539,56 +531,12 @@ Ensure the default browser behavior of the `hidden` attribute.
   right: 0px;
 }
 
-.top-10 {
-  top: 2.5rem;
-}
-
-.-top-10 {
-  top: -2.5rem;
-}
-
-.-top-44 {
-  top: -11rem;
-}
-
-.-top-40 {
-  top: -10rem;
-}
-
-.-top-32 {
-  top: -8rem;
-}
-
-.-top-28 {
-  top: -7rem;
-}
-
-.-top-\[29\] {
-  top: -29;
-}
-
 .-z-50 {
   z-index: -50;
 }
 
-.-z-10 {
-  z-index: -10;
-}
-
-.z-10 {
-  z-index: 10;
-}
-
-.z-50 {
-  z-index: 50;
-}
-
-.z-20 {
-  z-index: 20;
-}
-
-.z-0 {
-  z-index: 0;
+.-z-20 {
+  z-index: -20;
 }
 
 .mx-auto {
@@ -756,6 +704,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .justify-start {
   justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -964,14 +916,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 1rem;
 }
 
-.pt-1 {
-  padding-top: 0.25rem;
-}
-
-.pt-10 {
-  padding-top: 2.5rem;
-}
-
 .pt-0 {
   padding-top: 0px;
 }
@@ -994,6 +938,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.75rem;
 }
 
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
@@ -1008,6 +957,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-weight: 500;
 }
 
+.italic {
+  font-style: italic;
+}
+
 .text-slate-300 {
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity));
@@ -1018,9 +971,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(226 232 240 / var(--tw-text-opacity));
 }
 
-.text-slate-100 {
+.text-gray-800 {
   --tw-text-opacity: 1;
-  color: rgb(241 245 249 / var(--tw-text-opacity));
+  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .text-slate-800 {
@@ -1053,9 +1006,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 
-.text-gray-400 {
+.text-gray-300 {
   --tw-text-opacity: 1;
-  color: rgb(156 163 175 / var(--tw-text-opacity));
+  color: rgb(209 213 219 / var(--tw-text-opacity));
+}
+
+.text-slate-100 {
+  --tw-text-opacity: 1;
+  color: rgb(241 245 249 / var(--tw-text-opacity));
 }
 
 .opacity-30 {
@@ -1096,6 +1054,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .ease-in-out {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@font-face {
+  font-family: "Nanum";
+
+  src: url("/fonts/NanumMyeongjo-Regular.ttf");
 }
 
 .hame-markdown {
@@ -1355,6 +1319,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   fill: #fff;
 }
 
+.hover\:text-gray-50:hover {
+  --tw-text-opacity: 1;
+  color: rgb(249 250 251 / var(--tw-text-opacity));
+}
+
+.hover\:underline:hover {
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+}
+
 .focus\:outline-none:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
@@ -1427,9 +1401,9 @@ Ensure the default browser behavior of the `hidden` attribute.
     color: rgb(209 213 219 / var(--tw-text-opacity));
   }
 
-  .dark\:text-gray-400 {
+  .dark\:text-gray-100 {
     --tw-text-opacity: 1;
-    color: rgb(156 163 175 / var(--tw-text-opacity));
+    color: rgb(243 244 246 / var(--tw-text-opacity));
   }
 
   .dark\:invert {
