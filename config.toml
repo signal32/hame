@@ -26,3 +26,8 @@ links = [
     {title = "Github", href = "github.com", icon = "github"},
     {title = "Instagram", href = "github.com", icon = "instagram"}
 ]
+
+other_sites = [
+    {title = "Rails Developments", href = "http://rails.hamishweir.uk"},
+    {title = "Photography", href = "https://photos.hamishweir.uk"}
+]

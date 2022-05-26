@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,27 +10,36 @@
     {% endblock extra_head %}
 </head>
 
-<body class="dark:bg-gray-700 bg-slate-300 bg-repeat flex flex-col h-screen" style="background-image: url(/images/circuit-board.svg)">
+<body class=" dark:bg-gray-900 bg-gray-300 bg-repeat flex flex-col h-screen">
 
-    <header class="bg-slate-800 mb-5 top-0 sticky shadow-lg" >
-        <div class="max-w-2xl mx-auto px-2 sm:px-6">
+    {% if page.extra.background_image %}
+    {% set background_image = page.extra.background_image %}
+    {% elif section.extra.background_image %}
+    {% set background_image = section.extra.background_image %}
+    {% endif %}
+    {%if background_image %}
+    <div class="absolute opacity-30 backdrop-blur w-full h-2/3 -z-50 overflow-hidden bg-center bg-cover" style="background-image: url('{{background_image}}')"></div>
+    <div class="absolute  bg-gradient-to-b from-transparent dark:to-gray-900 to-gray-300 w-full h-2/3 -z-50 overflow-hidden backdrop-blur"></div>
+    {% endif %}
+
+    <header class="mb-5 top-0 sticky bg-gradient-to-t from-transparent dark:to-gray-900 to-gray-300">
+        <div class="max-w-4xl mx-auto px-2 sm:px-6 mt-2 rounded-lg shadow-lg bg-ocean">
             <div class="flex justify-between items-center py-1 md:justify-start">
                 <img class=" w-2/6 dark:invert py-0" src="{{ get_url(path='/images/logo.svg') }}" alt="{{config.title}}"/>
 
                 {% if config.extra.links %}
                 <div class=" w-4/6 flex justify-end items-end py-0">
                     {% set top_section = get_section(path="_index.md") %}
-                    
-                    
+    
                     {% for page in config.extra.nav %}
-                    <a class="p-1 mx-1 rounded hover:bg-slate-700 text-slate-300 {% if page.href == current_path  %} bg-slate-700 {% endif %}"
+                    <a class="p-1 mx-1 rounded border-2 border-transparent hover:border-air transition-all text-slate-300 {% if page.href == current_path  %} bg-air {% endif %}"
                         href={{page.href}}>
                         {{page.title}}
                     </a>
                     {% endfor %}
 
                     {% for link in config.extra.links %}
-                    <svg class=" hover:fill-white fill-slate-400 w-8 h-8 px-2 transition-all">
+                    <svg class=" hover:fill-white fill-slate-300 w-8 h-8 px-2 transition-all">
                         <use xlink:href="/icons/bootstrap-icons.svg#{{link.icon}}"/>
                     </svg>
                     {% endfor %}
@@ -40,36 +50,34 @@
         </div>
     </header>
 
-
-    <!-- Main content container -->
-    <main class="p-2 max-w-2xl mx-auto flex-grow">
-
+    <main class="p-2 max-w-4xl mx-auto flex-grow">
         <!-- Notifications/global messages -->
-        <div class="rounded-xl p-2 mb-5 bg-slate-800 border border-slate-500 flex justify-between items-center">
+        {% if config.extra.global_message %}
+        <div class="rounded-xl p-2 mb-5 bg-slate-800 border border-air flex justify-between items-center">
             <div class="w-1/5 items-center justify-center flex">
-                <svg class="fill-slate-400 h-20 px-1">
+                <svg class="fill-slate-300 h-20 px-1">
                     <use xlink:href="/images/hello.svg#Capa_1"/>
                 </svg>
             </div>
-            <div class="w-4/5 border-l border-slate-400 pl-4 ">
-                <div class="text-lg text-slate-300">Hello, world!</div>
-                <div class="text-slate-400">
+            <div class="w-4/5 border-l border-air pl-4 ">
+                <div class="text-lg text-slate-200">Hello, world!</div>
+                <div class="text-slate-200">
                     Thanks for visiting. I'm in the process of setting this site up so expect that some features won't work correctly at the moment.
                 </div>
             </div>
         </div>
+        {% endif %}
 
-
-
+        <!-- Main content container -->
         {% block content %}
-        {% set blog = get_section(path="blog/_index.md") %}
 
+        {% set blog = get_section(path="blog/_index.md") %}
         {% if section.content or blog.pages %}
         <div>
             
-            <!-- Main page content -->
+            <!-- Main page markdown content -->
             {% if section.content %}
-            <div class="mb-4 mx-auto bg-slate-700 rounded-xl shadow-lg border-2 border-slate-700">
+            <div class="mb-4 mx-auto">
                 <div class="px-3 hame-markdown">{{ section.content | safe }}</div>
             </div>
             {% endif %}
@@ -81,30 +89,29 @@
 
                 {% for post in blog.pages | slice(end=20) %}
                 <div 
-                class="mb-4 mx-auto bg-slate-700 rounded-xl shadow-lg border-2 border-slate-700 hover:border-slate-600 transition-all"
-                onclick="window.location.href='{{post.permalink}}'">
+                class="mb-4 mx-auto dark:bg-gray-800 bg-gray-200 rounded-xl shadow-lg">
                     
                     {% if post.extra.image %}
-                    <img class="object-cover h-40 w-full overflow-auto"src="{{post.extra.image}}"/>
-                    {% else %}
-                    <img class="object-cover h-10 w-full overflow-auto"src="https://images.pexels.com/photos/310452/pexels-photo-310452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+                    <img class="object-cover h-40 w-full overflow-clip rounded-xl p-2" src="{{post.extra.image}}"/>
+                    {# {% else %} #}
+                    {# <img class="object-cover h-10 w-full overflow-auto rounded-xl p-2"src="https://images.pexels.com/photos/310452/pexels-photo-310452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/> #}
                     {% endif%}
 
                     <div class=" px-3">
                         <div class="flex justify-between items-center py-1 md:justify-start">
-                            <div class="w-3/4 text-xl font-medium text-slate-100">{{post.title}}</div>
+                            <div class="w-3/4 text-xl font-medium dark:text-slate-100 text-slate-800">{{post.title}}</div>
                             <div class="w-1/4 flex items-center">
-                                <svg class="w-1/3 fill-slate-400 h-4 px-2">
+                                <svg class="w-1/3 dark:fill-slate-400 fill-slate-600 h-4 px-2">
                                     <use xlink:href="icons/bootstrap-icons.svg#calendar"/>
                                 </svg>
-                                <div class="font-small text-slate-400">{{post.date}}</div>
+                                <div class="font-small dark:text-slate-400 text-slate-600">{{post.date}}</div>
                             </div>
 
                         </div>
-                        <p class="text-slate-300">{{ post.content | striptags | truncate(length=180) | safe}}</p>
+                        <p class="dark:text-slate-300 text-slate-700">{{ post.content | striptags | truncate(length=180) | safe}}</p>
             
                         <button
-                            class="py-2 px-4 my-2 w-full bg-slate-600 text-white rounded-lg shadow-md hover:bg-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-opacity-75"
+                            class="py-2 px-4 my-2 w-full bg-ocean text-white rounded-lg shadow-md hover:bg-air focus:outline-none focus:ring-2 focus:ring-paua focus:ring-opacity-75"
                             onclick="window.location.href='{{post.permalink}}'">
                             Read more
                     </button>
@@ -114,10 +121,10 @@
             </div>
             {% endif %}
 
-            <button
+            {# <button
             class="py-2 my-2 px-4 bg-slate-600 text-white rounded-lg shadow-md hover:bg-slate-500 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-opacity-75">
             Read more
-            </button>
+            </button> #}
 
         </div>
         {% endif %}
@@ -125,13 +132,37 @@
 
     </main>
 
-
-    <footer class=" bg-slate-800 align-bottom">
-        <div class="py-2 px-5 max-w-2xl mx-auto flex justify-between items-center md:justify-start">
-            <div class="w-1/5">
-                <img class="dark:invert py-0" src="{{ get_url(path='/images/logo.svg') }}" alt="{{config.title}}"/>
+    <footer class="align-bottom dark:text-gray-300 text-gray-700">
+        <div class="relative max-w-4xl mx-auto">
+            <div class=" px-2 sm:px-6 mb-2 rounded-lg shadow-lg dark:bg-gray-800 bg-gray-200">
+                <div class="py-3 mx-auto flex justify-between items-center md:justify-start">
+                    <div class="w-1/5">
+                        <img class="dark:invert py-0" src="{{ get_url(path='/images/logo.svg') }}" alt="{{config.title}}"/>
+                    </div>
+                    <div class="w-1/5">
+                        <h1>Random Entry</h1>
+                        <p class=" dark:text-gray-400 text-gray-600">Yeet</p>
+                    </div>
+                </div>
             </div>
+
+            {% if config.extra.other_sites %}
+            <div class="absolute -bottom-11 pt-10 left-0 right-0 max-w-4xl mx-auto px-2 sm:px-6 mb-2 rounded-lg shadow-lg bg-ocean -z-10">
+                <div class="py-3 mx-auto flex justify-between items-center md:justify-start">
+                    <div class="w-1/5">
+                        <h1 class=" font-semibold">Other sites:</h1>
+                    </div>
+
+                    {% for site in config.extra.other_sites %}
+                    <div class="w-1/5 hame-markdown">
+                        <a href="{{site.href}}">{{site.title}}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
+
     </footer>
 
 </body>

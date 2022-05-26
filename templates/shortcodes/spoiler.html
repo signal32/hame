@@ -1,0 +1,17 @@
+<div id="spoiler-container">
+    <button class="hame-button {% if class %} {{ class }} {% endif %}" id="show-button" onclick="showHidden()">Show {{hint}}</button>
+    <p hidden id="value" class="py-2 px-4 my-2 bg-gray-700 text-white rounded-lg shadow-md transition ease-in-out"></p>
+</div>
+
+<script>
+    const obfuscatedValue = '{{ hidden | base64_encode }}';
+    console.log(obfuscatedValue)
+
+    function showHidden(){
+        const value = atob(obfuscatedValue);
+        const node = document.createTextNode(value);
+        document.getElementById('show-button').hidden = true;
+        document.getElementById('value').textContent = value;
+        document.getElementById('value').hidden = false;
+    }
+</script>
