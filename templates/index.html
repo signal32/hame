@@ -24,28 +24,45 @@
 
     <header class="mb-5 top-0 sticky bg-gradient-to-t from-transparent dark:to-gray-900 to-gray-300">
         <div class="max-w-4xl mx-auto px-2 sm:px-6 mt-2 rounded-lg shadow-lg bg-ocean">
-            <div class="flex justify-between items-center py-1 md:justify-start">
-                <img class=" w-2/6 dark:invert py-0" src="{{ get_url(path='/images/logo.svg') }}" alt="{{config.title}}"/>
+            <div class="flex flex-wrap gap-2 justify-center items-center">
+                <div class="flex-auto basis-full md:basis-1/8 max-w-xs p-2">
+                    <img class="hidden dark:block" src="{{ get_url(path=config.extra.logo.dark) }}" alt="{{config.title}}"/>
+                    <img class="dark:hidden" src="{{ get_url(path=config.extra.logo.dark) }}" alt="{{config.title}}"/>
+                </div>
 
-                {% if config.extra.links %}
-                <div class=" w-4/6 flex justify-end items-end py-0">
-                    {% set top_section = get_section(path="_index.md") %}
+                {% if config.extra.nav %}
+                <div class="flex-auto basis-3/4 md:basis-auto">
+                    <div class="flex grow flex-wrap justify-center md:justify-end py-0">
+                        {% set top_section = get_section(path="_index.md") %}
+        
+                        {% for page in config.extra.nav %}
+                        <div class="flex">
+                            <a class="p-1 mx-1 rounded border-2 border-transparent hover:border-air transition-all text-slate-300 {% if page.href == current_path  %} bg-air {% endif %}"
+                            href={{page.href}}>
+                                {{page.title}}
+                        </a>
+                        </div>
+                        {% endfor %}
     
-                    {% for page in config.extra.nav %}
-                    <a class="p-1 mx-1 rounded border-2 border-transparent hover:border-air transition-all text-slate-300 {% if page.href == current_path  %} bg-air {% endif %}"
-                        href={{page.href}}>
-                        {{page.title}}
-                    </a>
-                    {% endfor %}
-
-                    {% for link in config.extra.links %}
-                    <svg class=" hover:fill-white fill-slate-300 w-8 h-8 px-2 transition-all">
-                        <use xlink:href="/icons/bootstrap-icons.svg#{{link.icon}}"/>
-                    </svg>
-                    {% endfor %}
-
+                    </div>
                 </div>
                 {% endif %}
+
+                {% if config.extra.links %}
+                <div class=" flex-none md:basis-auto">
+                    <div class="flex flex-wrap justify-center md:justify-end">
+
+                        {% for link in config.extra.links %}
+                        <div class="flex">
+                            <svg class=" hover:fill-white fill-slate-300 w-8 h-8 px-2 transition-all">
+                                <use xlink:href="/icons/bootstrap-icons.svg#{{link.icon}}"/>
+                            </svg>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
             </div>
         </div>
     </header>
@@ -146,14 +163,14 @@
                 </div>
             </div>
 
-            {% if config.extra.other_sites %}
+            {% if config.extra.other_sites_list %}
             <div class="absolute -bottom-11 pt-10 left-0 right-0 max-w-4xl mx-auto px-2 sm:px-6 mb-2 rounded-lg shadow-lg bg-ocean -z-10">
                 <div class="py-3 mx-auto flex justify-between items-center md:justify-start">
                     <div class="w-1/5">
-                        <h1 class=" font-semibold">Other sites:</h1>
+                        <h1 class=" font-semibold"> {% if config.extra.other_sites_label %} {{config.extra.other_sites_label}} {% else %} Other websites: {% endif %} </h1>
                     </div>
 
-                    {% for site in config.extra.other_sites %}
+                    {% for site in config.extra.other_sites_list %}
                     <div class="w-1/5 hame-markdown">
                         <a href="{{site.href}}">{{site.title}}</a>
                     </div>

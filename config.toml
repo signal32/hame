@@ -16,18 +16,27 @@ highlight_code = true
 [extra]
 # Put all your custom variables here
 
+logo = {light = "/images/logo.svg", dark = "/images/logo.svg"}
+branding_favicon = ""
+
+colors = {primary = "", secondary = "", tertiary = ""}
+
+# Shown in the main navigastion bar
 nav = [
     {title = "Home", href = "/"},
     {title = "Showcase", href = "/showcase/"},
     {title = "Contact", href = "/contact/"}
 ]
 
+# Additional external links for social media profiles etc
 links = [
     {title = "Github", href = "github.com", icon = "github"},
     {title = "Instagram", href = "github.com", icon = "instagram"}
 ]
 
-other_sites = [
+# Additional external links to other websites
+other_sites_label = "My other websites:"
+other_sites_list = [
     {title = "Rails Developments", href = "http://rails.hamishweir.uk"},
     {title = "Photography", href = "https://photos.hamishweir.uk"}
 ]
