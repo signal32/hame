@@ -25,14 +25,14 @@
     <header class="mb-5 top-0 sticky bg-gradient-to-t from-transparent dark:to-gray-900 to-gray-300">
         <div class="max-w-4xl mx-auto px-2 sm:px-6 mt-2 rounded-lg shadow-lg bg-ocean">
             <div class="flex flex-wrap gap-2 justify-center items-center">
-                <div class="flex-auto basis-full md:basis-1/8 max-w-xs p-2">
+                <div class="flex-auto basis-full sm:basis-1/8 max-w-xs p-2">
                     <img class="hidden dark:block" src="{{ get_url(path=config.extra.logo.dark) }}" alt="{{config.title}}"/>
                     <img class="dark:hidden" src="{{ get_url(path=config.extra.logo.dark) }}" alt="{{config.title}}"/>
                 </div>
 
                 {% if config.extra.nav %}
-                <div class="flex-auto basis-3/4 md:basis-auto">
-                    <div class="flex grow flex-wrap justify-center md:justify-end py-0">
+                <div class="flex-auto basis-3/4 sm:basis-auto">
+                    <div class="flex grow flex-wrap justify-center sm:justify-end py-0">
                         {% set top_section = get_section(path="_index.md") %}
         
                         {% for page in config.extra.nav %}
@@ -49,8 +49,8 @@
                 {% endif %}
 
                 {% if config.extra.links %}
-                <div class=" flex-none md:basis-auto">
-                    <div class="flex flex-wrap justify-center md:justify-end">
+                <div class=" flex-none sm:basis-auto">
+                    <div class="flex flex-wrap justify-center sm:justify-end">
 
                         {% for link in config.extra.links %}
                         <div class="flex">
@@ -115,13 +115,13 @@
                     {% endif%}
 
                     <div class=" px-3">
-                        <div class="flex justify-between items-center py-1 md:justify-start">
+                        <div class="flex justify-between items-center py-1 sm:justify-start">
                             <div class="w-3/4 text-xl font-medium dark:text-slate-100 text-slate-800">{{post.title}}</div>
                             <div class="w-1/4 flex items-center">
                                 <svg class="w-1/3 dark:fill-slate-400 fill-slate-600 h-4 px-2">
                                     <use xlink:href="icons/bootstrap-icons.svg#calendar"/>
                                 </svg>
-                                <div class="font-small dark:text-slate-400 text-slate-600">{{post.date}}</div>
+                                <div class="font-small dark:text-slate-400 text-slate-600">{{post.date | date(format="%-d %B, %Y")}}</div>
                             </div>
 
                         </div>
@@ -150,9 +150,9 @@
     </main>
 
     <footer class="align-bottom dark:text-gray-300 text-gray-700">
-        <div class="relative max-w-4xl mx-auto">
+        <div class="max-w-4xl mx-auto z-50">
             <div class=" px-2 sm:px-6 mb-2 rounded-lg shadow-lg dark:bg-gray-800 bg-gray-200">
-                <div class="py-3 mx-auto flex justify-between items-center md:justify-start">
+                <div class="py-3 mx-auto flex justify-between items-center sm:justify-start">
                     <div class="w-1/5">
                         <img class="dark:invert py-0" src="{{ get_url(path='/images/logo.svg') }}" alt="{{config.title}}"/>
                     </div>
@@ -162,23 +162,26 @@
                     </div>
                 </div>
             </div>
+        </div>
+        {% if config.extra.other_sites_list %}
+        <div class="z-0 relative -top-6 pt-0 mt-0 left-0 right-0 max-w-4xl sm:px-6 mb-2 rounded-b-lg shadow-lg bg-ocean mx-auto">
 
-            {% if config.extra.other_sites_list %}
-            <div class="absolute -bottom-11 pt-10 left-0 right-0 max-w-4xl mx-auto px-2 sm:px-6 mb-2 rounded-lg shadow-lg bg-ocean -z-10">
-                <div class="py-3 mx-auto flex justify-between items-center md:justify-start">
-                    <div class="w-1/5">
-                        <h1 class=" font-semibold"> {% if config.extra.other_sites_label %} {{config.extra.other_sites_label}} {% else %} Other websites: {% endif %} </h1>
+                <div class="py-3 mx-auto flex justify-start items-center gap-2">
+                    <div class="flex-none basis-1/5 dark:bg-gray-800 bg-gray-200 p-1 rounded-b-lg text-center shadow-lg">
+                        <h1 class="text-sm"> {% if config.extra.other_sites_label %} {{config.extra.other_sites_label}} {% else %} Other websites {% endif %} </h1>
                     </div>
 
                     {% for site in config.extra.other_sites_list %}
-                    <div class="w-1/5 hame-markdown">
+                    <div class="flex text-sm text-gray-400 text-center">
                         <a href="{{site.href}}">{{site.title}}</a>
                     </div>
+                    <div class="flex text-sm text-gray-400 text-center">
+                        <p>|</p>
+                    </div>
                     {% endfor %}
-                </div>
-            </div>
-            {% endif %}
+                </div>    
         </div>
+        {% endif %}
 
     </footer>
 

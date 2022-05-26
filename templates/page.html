@@ -7,7 +7,7 @@
 {% block content %}
 <main class="flex flex-wrap gap-2">
     
-    <div class="flex-auto {% if page.extra.sidebar_content %} basis-full md:basis-auto w-3/5 {% else %} basis-full {% endif %}">
+    <div class="flex-auto {% if page.extra.sidebar_content %} basis-full sm:basis-auto w-3/5 {% else %} basis-full {% endif %}">
         {% if page.extra.image %}
         <img class="object-cover w-full max-h-64 overflow-auto rounded-xl mb-4 mx-auto shadow-lg"src="{{page.extra.image}}"/>
         {% endif%}
@@ -32,7 +32,7 @@
     </div>
 
     {% if page.extra.sidebar_content %}
-    <div class="hame-card flex-auto basis-full md:basis-1/4">
+    <div class="hame-card flex-auto basis-full sm:basis-1/4">
         <div class="hame-markdown">
             {{ page.extra.sidebar_content | markdown(inline=true) | safe }}
         </div>

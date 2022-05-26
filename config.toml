@@ -35,7 +35,7 @@ links = [
 ]
 
 # Additional external links to other websites
-other_sites_label = "My other websites:"
+other_sites_label = "My other websites"
 other_sites_list = [
     {title = "Rails Developments", href = "http://rails.hamishweir.uk"},
     {title = "Photography", href = "https://photos.hamishweir.uk"}
