@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "npx tailwindcss -i ./styles/styles.css -o ./static/styles/style.css --watch",
+    "watch": "npm run build && npx tailwindcss -i ./styles/styles.css -o ./static/styles/style.css --watch",
     "build": "npx tailwindcss -i ./styles/styles.css -o ./static/styles/style.css",
-    "serve": "concurrently \"npx tailwindcss -i ./styles/styles.css -o ./public/styles/style.css --watch\" \"zola-bin serve\""
+    "serve": "cpy ./style.css ./public/styles && concurrently \"npx tailwindcss -i ./styles/styles.css -o ./public/styles/style.css --watch\" \"zola-bin serve\""
   },
   "author": "Hamish Weir",
   "license": "ISC",
@@ -16,6 +16,7 @@
   },
   "devDependencies": {
     "concurrently": "^7.2.1",
+    "cpy-cli": "^4.1.0",
     "zola-bin": "^0.3.3"
   }
 }
