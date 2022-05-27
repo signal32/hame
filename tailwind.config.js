@@ -15,7 +15,7 @@ module.exports = {
         ...colors
       },
       fontFamily: {
-        'serif': ['nanum']
+        'display': ['BalooRegular']
       }
     },
     variants: {},
