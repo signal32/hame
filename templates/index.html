@@ -26,8 +26,8 @@
         <div class="max-w-4xl mx-auto px-2 sm:px-6 mt-2 rounded-lg shadow-lg bg-ocean">
             <div class="flex flex-wrap gap-2 justify-center items-center">
                 <div class="flex-auto basis-full sm:basis-1/8 max-w-xs p-2">
-                    <img class="hidden dark:block" src="{{ get_url(path=config.extra.logo.dark) }}" alt="{{config.title}}"/>
-                    <img class="dark:hidden" src="{{ get_url(path=config.extra.logo.dark) }}" alt="{{config.title}}"/>
+                    <img class="hidden dark:block h-12" src="{{ get_url(path=config.extra.logo.dark) }}" alt="{{config.title}}"/>
+                    <img class="dark:hidden h-12" src="{{ get_url(path=config.extra.logo.dark) }}" alt="{{config.title}}"/>
                 </div>
 
                 {% if config.extra.nav %}
@@ -40,7 +40,7 @@
                             <a class="p-1 mx-1 rounded border-2 border-transparent hover:border-air transition-all text-slate-300 {% if page.href == current_path  %} bg-air {% endif %}"
                             href={{page.href}}>
                                 {{page.title}}
-                        </a>
+                            </a>
                         </div>
                         {% endfor %}
     
