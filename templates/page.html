@@ -8,9 +8,15 @@
 <main class="flex flex-wrap gap-2">
     
     <div class="flex-auto grow {% if page.extra.sidebar_content %} basis-full sm:basis-auto w-3/5 {% else %} basis-full {% endif %}">
+
         {% if page.extra.image %}
-        <img class="object-cover w-full max-h-64 overflow-auto rounded-xl mb-4 mx-auto shadow-lg"src="{{page.extra.image}}"/>
-        {% endif%}
+        {% if page.extra.image is not ending_with(".svg")%}
+        {% set page_image_small = resize_image(path=page.extra.image, width=864, height=256, op="fill") %}
+        <img class="object-cover w-full max-h-64 overflow-auto rounded-xl mb-4 mx-auto shadow-lg" src="{{page_image_small.url}}"/>
+        {% else %}
+        <img class="object-cover w-full max-h-64 overflow-auto rounded-xl mb-4 mx-auto shadow-lg" src="{{page.extra.image}}"/>
+        {% endif %}
+        {% endif %}
     
         {% if page.extra.sidebar_content %}
         {# <div>{{ page.extra.sidebar_content | markdown(inline=true) | safe }} </div> #}

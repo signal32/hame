@@ -14,9 +14,12 @@
         class="mb-4 mx-auto dark:bg-gray-800 bg-gray-200 rounded-xl shadow-lg">
             
             {% if post.extra.image %}
+            {% if post.extra.image is not ending_with(".svg")%}
+            {% set post_image_small = resize_image(path=post.extra.image, width=864, height=160, op="fill") %}
+            <img class="object-cover h-40 w-full overflow-clip rounded-xl p-2" src="{{post_image_small.url}}"/>
+            {% else %}
             <img class="object-cover h-40 w-full overflow-clip rounded-xl p-2" src="{{post.extra.image}}"/>
-            {# {% else %} #}
-            {# <img class="object-cover h-10 w-full overflow-auto rounded-xl p-2"src="https://images.pexels.com/photos/310452/pexels-photo-310452.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/> #}
+            {% endif %}
             {% endif %}
 
             <div class=" px-3">
