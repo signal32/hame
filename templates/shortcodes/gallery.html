@@ -1,0 +1,36 @@
+<div id="gallery" class="hame-markdown">
+
+    <div class="flex flex-wrap gap-2 justify-center">
+
+        {% for image in images %}
+        {% set thumbnail = resize_image(path=image, width=268, height=150)%}
+        <div class="{% if large_gallery %} basis-64 {% else %} basis-28 {% endif %} hover:scale-105 transition-all" onclick="showImage('{{image}}')">
+            <img src="{{thumbnail.url}}">
+        </div>
+        {%endfor%}
+
+    </div>
+
+    <div id="fullsize_container" class="absolute w-full h-full top-0 left-0 z-10 bg-black bg-opacity-75" hidden onclick="hideImage()">
+        <div class="relative p-4 sm:p-12 w-full m-auto flex justify-center">
+            <div>
+                <button class="text-white dark:text-white hover:underline" onclick="hideImage()">Close</button>
+                <img class=" max-h-[80vh]" src="">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function showImage(url) {
+        const element = document.getElementById('fullsize_container');
+        const img = element.querySelector('img');
+
+        element.hidden = false;
+        img.setAttribute('src', url);
+    }
+
+    function hideImage() {
+        document.getElementById('fullsize_container').hidden = true;
+    }
+</script>

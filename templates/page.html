@@ -37,12 +37,26 @@
         </div>
     </div>
 
-    {% if page.extra.sidebar_content %}
-    <div class="hame-card flex-auto basis-full sm:basis-1/4">
-        <div class="hame-markdown">
-            {{ page.extra.sidebar_content | markdown(inline=true) | safe }}
+    {% if page.extra.sidebar_content or page.extra.gallery_images %}
+    <div class="flex-auto basis-full sm:basis-1/4">
+        <div class="hame-card">
+            {%if page.extra.gallery_images %}
+            {%set images = page.extra.gallery_images%}
+            <div>
+                <h3 class="hame-markdown">Gallery</h3>
+                {% include "shortcodes/gallery.html" %}
+            </div>
+            {%endif%}
+    
+            {% if page.extra.sidebar_content %}
+            <div class="hame-markdown">
+                {{ page.extra.sidebar_content | markdown(inline=true) | safe }}
+            </div>
+            {% endif %}
         </div>
-        
+
+
+
     </div>
     {% endif %}
     

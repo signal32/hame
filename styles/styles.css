@@ -29,23 +29,23 @@
 }
 
 .hame-markdown h2:not(.hame-markdown-exclude) {
-    @apply text-2xl font-bold py-1 my-2;
+    @apply text-xl font-medium dark:text-slate-100 text-slate-800 py-2;
 }
 
 .hame-markdown h3:not(.hame-markdown-exclude) {
-    @apply text-xl font-bold py-1 my-2
+    @apply text-xl font-medium dark:text-slate-100 text-slate-800 py-2;
 }
 
 .hame-markdown h4:not(.hame-markdown-exclude) {
-    @apply text-lg font-semibold py-1 my-2
+    @apply text-xl dark:text-slate-100 text-slate-800 py-2;
 }
 
 .hame-markdown h5:not(.hame-markdown-exclude) {
-    @apply text-lg font-semibold py-1 my-2
+    @apply text-lg dark:text-slate-100 text-slate-800 py-2;
 }
 
 .hame-markdown h6:not(.hame-markdown-exclude) {
-    @apply text-lg font-semibold py-1 my-2
+    @apply text-sm dark:text-slate-100 text-slate-800 py-2;
 }
 
 .hame-markdown pre:not(.hame-markdown-exclude) {
@@ -53,7 +53,7 @@
 }
 
 .hame-markdown img:not(.hame-markdown-exclude) {
-    @apply rounded-lg shadow-lg my-2
+    @apply rounded-lg shadow-lg my-2 text-center
 }
   
 .hame-markdown.blockquote {
